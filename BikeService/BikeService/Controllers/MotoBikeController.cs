@@ -23,7 +23,7 @@ namespace BikeService.Controllers
         }
 
         [ActionName("GetMotorbike")]
-        [HttpPost("/themThongtinMoto")]
+        [HttpPost("/add-motorbike")]
         public async Task<ActionResult<Motorbike>> Add(Motorbike moto)
         {
             _context.Motorbikes.Add(moto);
