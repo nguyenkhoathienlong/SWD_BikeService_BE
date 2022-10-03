@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Users\\Phuc\\FPTUniversity\\Fall2022\\SWD\\SWD_BikeService_BE\\BikeService\\BikeService\\BikeService.csproj": {}
+    "D:\\DocumentStudy\\SWD\\BE Project\\SWD_BikeService_BE\\BikeService\\BikeService\\BikeService.csproj": {}
   },
   "projects": {
-    "D:\\Users\\Phuc\\FPTUniversity\\Fall2022\\SWD\\SWD_BikeService_BE\\BikeService\\BikeService\\BikeService.csproj": {
+    "D:\\DocumentStudy\\SWD\\BE Project\\SWD_BikeService_BE\\BikeService\\BikeService\\BikeService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Users\\Phuc\\FPTUniversity\\Fall2022\\SWD\\SWD_BikeService_BE\\BikeService\\BikeService\\BikeService.csproj",
+        "projectUniqueName": "D:\\DocumentStudy\\SWD\\BE Project\\SWD_BikeService_BE\\BikeService\\BikeService\\BikeService.csproj",
         "projectName": "BikeService",
-        "projectPath": "D:\\Users\\Phuc\\FPTUniversity\\Fall2022\\SWD\\SWD_BikeService_BE\\BikeService\\BikeService\\BikeService.csproj",
-        "packagesPath": "C:\\Users\\Phuc\\.nuget\\packages\\",
-        "outputPath": "D:\\Users\\Phuc\\FPTUniversity\\Fall2022\\SWD\\SWD_BikeService_BE\\BikeService\\BikeService\\obj\\",
+        "projectPath": "D:\\DocumentStudy\\SWD\\BE Project\\SWD_BikeService_BE\\BikeService\\BikeService\\BikeService.csproj",
+        "packagesPath": "C:\\Users\\ThienLong\\.nuget\\packages\\",
+        "outputPath": "D:\\DocumentStudy\\SWD\\BE Project\\SWD_BikeService_BE\\BikeService\\BikeService\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Phuc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ThienLong\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -43,6 +48,10 @@
             "Amazon.Lambda.AspNetCoreServer": {
               "target": "Package",
               "version": "[7.2.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -71,6 +80,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.0.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.23.1, )"
             }
           },
           "imports": [
