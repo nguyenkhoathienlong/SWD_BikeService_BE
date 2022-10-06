@@ -1,6 +1,6 @@
 ﻿namespace BikeService.DTOs.Request
 {
-    public class OrderResponse
+    public class OrderRequest
     {
         public DateOnly Date { get; set; }
         public float Total { get; set; }

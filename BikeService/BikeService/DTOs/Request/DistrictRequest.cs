@@ -2,7 +2,7 @@
 
 namespace BikeService.DTOs.Request
 {
-    public class DistrictResponse
+    public class DistrictRequest
     {
         public string Name { get; set; } = null!;
     }

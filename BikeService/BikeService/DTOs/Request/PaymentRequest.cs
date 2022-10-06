@@ -1,6 +1,6 @@
 ﻿namespace BikeService.DTOs.Request
 {
-    public class PaymentResponse
+    public class PaymentRequest
     {
         public int PaymentMethodId { get; set; }
         public float AmountPaid { get; set; }

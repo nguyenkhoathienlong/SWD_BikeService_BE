@@ -1,6 +1,6 @@
 ﻿namespace BikeService.DTOs.Request
 {
-    public class OrderDetailsResponse
+    public class OrderDetailsRequest
     {
         public int ProductId { get; set; }
         public float OriginalPrice { get; set; }
