@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using BikeService.Data;
+using BikeService.Models;
 using BikeService.Models.Request;
 using BikeService.Models.Response;
-using BikeService.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BikeService.Controllers

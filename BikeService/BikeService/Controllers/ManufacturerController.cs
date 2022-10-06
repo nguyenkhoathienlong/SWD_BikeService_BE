@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using BikeService.Data;
-using BikeService.Models.Request;
 using BikeService.Models;
-using Microsoft.AspNetCore.Http;
+using BikeService.Models.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BikeService.Controllers
@@ -28,7 +27,7 @@ namespace BikeService.Controllers
             manufacturer.Name = manufactureRequest.Name;
             _context.Manufacturers.Add(manufacturer);
             await _context.SaveChangesAsync();
-            return CreatedAtAction("AddManufacturer", new { id = manufacturer.Id , manufactureRequest});
+            return CreatedAtAction("AddManufacturer", new { id = manufacturer.Id, manufactureRequest });
         }
 
     }

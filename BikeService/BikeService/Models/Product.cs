@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace BikeService.Models
+﻿namespace BikeService.Models
 {
     public partial class Product
     {

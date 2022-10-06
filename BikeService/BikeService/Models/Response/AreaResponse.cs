@@ -1,5 +1,5 @@
 ﻿
-namespace BikeService.Models.Response 
+namespace BikeService.Models.Response
 {
     public class AreaResponse
     {

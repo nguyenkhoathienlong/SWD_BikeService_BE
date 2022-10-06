@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using BikeService.Models.Response;
 using BikeService.Models;
+using BikeService.Models.Response;
 
 namespace BikeService.Profiles
 {

@@ -1,6 +1,5 @@
 ﻿
 using Firebase.Auth;
-using System;
 
 namespace FirebaseAuthentication
 {

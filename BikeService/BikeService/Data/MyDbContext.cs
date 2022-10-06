@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BikeService.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using BikeService.Models;
 
 namespace BikeService.Data
 {
