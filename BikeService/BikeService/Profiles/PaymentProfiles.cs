@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using BikeService.Models;
-using BikeService.Models.Response;
+using BikeService.Models.Request;
 
 namespace BikeService.Profiles
 {
@@ -8,7 +8,7 @@ namespace BikeService.Profiles
     {
         public PaymentProfiles()
         {
-            CreateMap<Payment, PaymentResponse>();
+            CreateMap<PaymentRequest, Payment>();
         }
     }
 }

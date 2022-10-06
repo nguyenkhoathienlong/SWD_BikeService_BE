@@ -1,8 +1,11 @@
 using BikeService.Data;
+using BikeService.Models;
+using BikeService.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace BikeService;
 
@@ -22,14 +25,23 @@ public class Startup
     {
         services.AddControllers();
         services.AddSwaggerGen();
+        services.AddCors();
+        services.AddControllers().AddJsonOptions(x =>
+        {
+            // serialize enums as strings in api responses (e.g. Role)
+            x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+
+            // ignore omitted parameters on models to enable optional params (e.g. User update)
+            x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+        });
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+        services.AddScoped <IManufacturerService, ManufacturerService>();
         services.AddDbContext<MyDbContext>(option =>
         {
             option.UseMySql(Configuration.GetConnectionString("DefaultConnection"),
             Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.23-mysql"));
         });
         services.AddEndpointsApiExplorer();
-
         //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddScheme<AuthenticationSchemeOptions, 
         //    FirebaseAuthenticationHandler>(JwtBearerDefaults.AuthenticationScheme, o => { });
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
@@ -67,12 +79,21 @@ public class Startup
         app.UseHttpsRedirection();
         app.UseRouting();
         app.UseAuthorization();
+        {
+            app.UseCors(x => x
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+            //app.MapControllers();
+            // global error handler
+            //app.UseMiddleware<ErrorHandlerMiddleware>();
+        }
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
             endpoints.MapGet("/", async context =>
             {
-                await context.Response.WriteAsync("Welcome to running ASP.NET Core on AWS Lambda");
+                await context.Response.WriteAsync("Welcome to My Bike Service");
             });
         });
     }

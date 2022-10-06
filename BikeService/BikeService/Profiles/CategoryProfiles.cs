@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using BikeService.Models;
-using BikeService.Models.Response;
+using BikeService.Models.Request;
 
 namespace BikeService.Profiles
 {
@@ -9,7 +9,7 @@ namespace BikeService.Profiles
         public CategoryProfiles()
         {
             //Source -> Destination
-            CreateMap<Category, CategoryResponse>();
+            CreateMap<CategoryRequest, Category>();
         }
     }
 }

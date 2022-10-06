@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/Yf+4LTHdngxkpdhe7MVaPyF7ulPTFaXZZJi2tUf6fcXd5sc9vB/sPGcUIbVKLJzOIBTIPJIZaHjRXjsJTBJFw==",
+  "dgSpecHash": "S0uqD6wBD9y36fgY4jDAocuUIkgnqb+9YNGMksQ3IhYyJHjgv5WqI552M6E/Vfa4oz14bOE3M8WqZ4B08MwHkA==",
   "success": true,
   "projectFilePath": "D:\\DocumentStudy\\SWD\\BE Project\\SWD_BikeService_BE\\BikeService\\BikeService\\BikeService.csproj",
   "expectedPackageFiles": [
@@ -21,6 +21,7 @@
     "C:\\Users\\ThienLong\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.9\\microsoft.entityframeworkcore.abstractions.6.0.9.nupkg.sha512",
     "C:\\Users\\ThienLong\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\6.0.9\\microsoft.entityframeworkcore.analyzers.6.0.9.nupkg.sha512",
     "C:\\Users\\ThienLong\\.nuget\\packages\\microsoft.entityframeworkcore.design\\6.0.0\\microsoft.entityframeworkcore.design.6.0.0.nupkg.sha512",
+    "C:\\Users\\ThienLong\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\6.0.0\\microsoft.entityframeworkcore.inmemory.6.0.0.nupkg.sha512",
     "C:\\Users\\ThienLong\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\6.0.9\\microsoft.entityframeworkcore.relational.6.0.9.nupkg.sha512",
     "C:\\Users\\ThienLong\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\6.0.9\\microsoft.entityframeworkcore.sqlserver.6.0.9.nupkg.sha512",
     "C:\\Users\\ThienLong\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\6.0.0\\microsoft.entityframeworkcore.tools.6.0.0.nupkg.sha512",
