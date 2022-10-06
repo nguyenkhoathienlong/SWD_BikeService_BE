@@ -1,5 +1,8 @@
-﻿using BikeService.Models;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using BikeService.Models;
 
 namespace BikeService.Data
 {
@@ -39,9 +42,7 @@ namespace BikeService.Data
             {
                 entity.ToTable("area");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
@@ -52,9 +53,7 @@ namespace BikeService.Data
             {
                 entity.ToTable("brand");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
@@ -65,9 +64,7 @@ namespace BikeService.Data
             {
                 entity.ToTable("category");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.IsService)
                     .HasColumnType("bit(1)")
@@ -77,34 +74,13 @@ namespace BikeService.Data
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
                     .HasColumnName("name");
-
-                entity.HasMany(d => d.ProductsNavigation)
-                    .WithMany(p => p.Categories)
-                    .UsingEntity<Dictionary<string, object>>(
-                        "ServiceMapping",
-                        l => l.HasOne<Product>().WithMany().HasForeignKey("ProductId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("fk_product_id"),
-                        r => r.HasOne<Category>().WithMany().HasForeignKey("CategoryId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("fk_product_service"),
-                        j =>
-                        {
-                            j.HasKey("CategoryId", "ProductId").HasName("PRIMARY").HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-
-                            j.ToTable("service_mapping");
-
-                            j.HasIndex(new[] { "ProductId" }, "fk_product_id");
-
-                            j.IndexerProperty<int>("CategoryId").HasColumnName("category_id");
-
-                            j.IndexerProperty<int>("ProductId").HasColumnName("product_id");
-                        });
             });
 
             modelBuilder.Entity<Customer>(entity =>
             {
                 entity.ToTable("customer");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Email)
                     .HasMaxLength(100)
@@ -123,9 +99,7 @@ namespace BikeService.Data
             {
                 entity.ToTable("district");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
@@ -136,9 +110,7 @@ namespace BikeService.Data
             {
                 entity.ToTable("manufacturer");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
@@ -149,9 +121,7 @@ namespace BikeService.Data
             {
                 entity.ToTable("model");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.BrandId).HasColumnName("brand_id");
 
@@ -176,9 +146,12 @@ namespace BikeService.Data
             {
                 entity.ToTable("motorbike");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.HasIndex(e => e.CustomerId, "fk_customer_motorbike_idx");
+
+                entity.HasIndex(e => e.LicensePlate, "license_plate_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.CustomerId).HasColumnName("customer_id");
 
@@ -189,19 +162,20 @@ namespace BikeService.Data
 
                 entity.Property(e => e.LicensePlate)
                     .HasMaxLength(11)
-                    .HasColumnType("varchar(11)")
                     .HasColumnName("license_plate");
+
+                entity.HasOne(d => d.Customer)
+                    .WithMany(p => p.Motorbikes)
+                    .HasForeignKey(d => d.CustomerId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_customer_motorbike");
             });
 
             modelBuilder.Entity<Order>(entity =>
             {
                 entity.ToTable("order");
 
-                entity.HasIndex(e => e.StoreId, "fk_order_store");
-
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Date).HasColumnName("date");
 
@@ -210,23 +184,13 @@ namespace BikeService.Data
                 entity.Property(e => e.StoreId).HasColumnName("store_id");
 
                 entity.Property(e => e.Total).HasColumnName("total");
-
-                entity.HasOne(d => d.Store)
-                    .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.StoreId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_order_store");
             });
 
             modelBuilder.Entity<OrderDetail>(entity =>
             {
                 entity.ToTable("order_detail");
 
-                entity.HasIndex(e => e.ProductId, "fk_order_product");
-
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.OriginalPrice).HasColumnName("original_price");
 
@@ -235,52 +199,26 @@ namespace BikeService.Data
                 entity.Property(e => e.PromotionPrice).HasColumnName("promotion_price");
 
                 entity.Property(e => e.Quantity).HasColumnName("quantity");
-
-                entity.HasOne(d => d.Product)
-                    .WithMany(p => p.OrderDetails)
-                    .HasForeignKey(d => d.ProductId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_order_product");
             });
 
             modelBuilder.Entity<Payment>(entity =>
             {
                 entity.ToTable("payment");
 
-                entity.HasIndex(e => e.OrderId, "fk_order_id");
-
-                entity.HasIndex(e => e.PaymentMethodId, "fk_payment_method_id");
-
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.AmountPaid).HasColumnName("amount_paid");
 
                 entity.Property(e => e.OrderId).HasColumnName("order_id");
 
                 entity.Property(e => e.PaymentMethodId).HasColumnName("payment_method_id");
-
-                entity.HasOne(d => d.Order)
-                    .WithMany(p => p.Payments)
-                    .HasForeignKey(d => d.OrderId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_order_id");
-
-                entity.HasOne(d => d.PaymentMethod)
-                    .WithMany(p => p.Payments)
-                    .HasForeignKey(d => d.PaymentMethodId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_payment_method_id");
             });
 
             modelBuilder.Entity<PaymentMethod>(entity =>
             {
                 entity.ToTable("payment_method");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.TypeName)
                     .HasMaxLength(50)
@@ -296,7 +234,7 @@ namespace BikeService.Data
                 entity.HasIndex(e => e.ManufacturerId, "fk_manufacturer_id");
 
                 entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
+                    .ValueGeneratedOnAdd()
                     .HasColumnName("id");
 
                 entity.Property(e => e.CategoryId).HasColumnName("category_id");
@@ -323,11 +261,55 @@ namespace BikeService.Data
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_category_id");
 
+                entity.HasOne(d => d.IdNavigation)
+                    .WithOne(p => p.Product)
+                    .HasForeignKey<Product>(d => d.Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_product_store");
+
                 entity.HasOne(d => d.Manufacturer)
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.ManufacturerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_manufacturer_id");
+
+                entity.HasMany(d => d.Products)
+                    .WithMany(p => p.Services)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "ServiceMapping",
+                        l => l.HasOne<Product>().WithMany().HasForeignKey("ProductId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("fk_product_id"),
+                        r => r.HasOne<Product>().WithMany().HasForeignKey("ServiceId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("fk_service_id"),
+                        j =>
+                        {
+                            j.HasKey("ProductId", "ServiceId").HasName("PRIMARY").HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+
+                            j.ToTable("service_mapping");
+
+                            j.HasIndex(new[] { "ServiceId" }, "fk_service_id_idx");
+
+                            j.IndexerProperty<int>("ProductId").ValueGeneratedOnAdd().HasColumnName("product_id");
+
+                            j.IndexerProperty<int>("ServiceId").HasColumnName("service_id");
+                        });
+
+                entity.HasMany(d => d.Services)
+                    .WithMany(p => p.Products)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "ServiceMapping",
+                        l => l.HasOne<Product>().WithMany().HasForeignKey("ServiceId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("fk_service_id"),
+                        r => r.HasOne<Product>().WithMany().HasForeignKey("ProductId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("fk_product_id"),
+                        j =>
+                        {
+                            j.HasKey("ProductId", "ServiceId").HasName("PRIMARY").HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+
+                            j.ToTable("service_mapping");
+
+                            j.HasIndex(new[] { "ServiceId" }, "fk_service_id_idx");
+
+                            j.IndexerProperty<int>("ProductId").ValueGeneratedOnAdd().HasColumnName("product_id");
+
+                            j.IndexerProperty<int>("ServiceId").HasColumnName("service_id");
+                        });
             });
 
             modelBuilder.Entity<Store>(entity =>
@@ -336,9 +318,7 @@ namespace BikeService.Data
 
                 entity.HasIndex(e => e.WardId, "fk_ward_id");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Address)
                     .HasMaxLength(100)
@@ -369,9 +349,7 @@ namespace BikeService.Data
 
                 entity.HasIndex(e => e.DistrictId, "fk_district_id");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.AreaId).HasColumnName("area_id");
 

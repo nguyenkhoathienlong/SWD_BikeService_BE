@@ -1,4 +1,7 @@
-﻿namespace BikeService.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace BikeService.Models
 {
     public partial class Model
     {

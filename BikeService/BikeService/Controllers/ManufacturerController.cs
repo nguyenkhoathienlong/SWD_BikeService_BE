@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using BikeService.Data;
-using BikeService.DTOs.Request;
+using BikeService.Models.Request;
 using BikeService.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

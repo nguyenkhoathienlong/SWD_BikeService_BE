@@ -1,5 +1,7 @@
-﻿using BikeService.Data;
+﻿using AutoMapper;
+using BikeService.Data;
 using BikeService.Models;
+using BikeService.Models.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BikeService.Controllers
@@ -9,33 +11,38 @@ namespace BikeService.Controllers
     public class LocationContoller : ControllerBase
     {
         private readonly MyDbContext _context;
+        private readonly IMapper _mapper;
 
-        public LocationContoller(MyDbContext context)
+        public LocationContoller(MyDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
-        
+
         [ActionName("AddArea")] //CREATE
         [HttpPost("/add-area")]
-        public async Task<ActionResult<Area>> Add(Area area)
+        public async Task<ActionResult<Area>> Add(AreaRequest areaRequest)
         {
+            Area area = new Area();
+            area.Name = areaRequest.Name;
             _context.Areas.Add(area);
             await _context.SaveChangesAsync();
-            return CreatedAtAction("AddArea", new { id = area.Id }, area);
+            return CreatedAtAction("AddArea", new { id = area.Id }, areaRequest);
         }
 
 
         [ActionName("UpdateArea")] //UPDATE
-        [HttpPut("/update-area")]
-        public async Task<ActionResult<Area>> Update(int id, Area area)
+        [HttpPut("/update-area/{id}")]
+        public async Task<ActionResult<Area>> Update(int id, AreaRequest areaRequest)
         {
-            if (id != area.Id)
-            {
-                return BadRequest();
-            }
-            _context.Areas.Update(area);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction("UpdateArea", new {id = area.Id}, area);
+            return null;
+        }
+
+        [ActionName("DeleteArea")]
+        [HttpDelete("delete-area/{id}")]
+        public async Task<ActionResult<Area>> Delete(int id, Area area)
+        {
+            return null;
         }
 
     }
