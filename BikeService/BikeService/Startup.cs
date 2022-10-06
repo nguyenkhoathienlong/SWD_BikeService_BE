@@ -17,6 +17,7 @@ public class Startup
     {
         services.AddControllers();
         services.AddSwaggerGen();
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         services.AddDbContext<MyDbContext>(option =>
         {
             option.UseMySql(Configuration.GetConnectionString("DefaultConnection"),

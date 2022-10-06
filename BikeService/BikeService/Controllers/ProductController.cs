@@ -1,4 +1,7 @@
-﻿using BikeService.Data;
+﻿using AutoMapper;
+using BikeService.Data;
+using BikeService.DTOs.Request;
+using BikeService.DTOs.Response;
 using BikeService.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,19 +13,26 @@ namespace BikeService.Controllers
     public class ProductController : ControllerBase
     {
         private readonly MyDbContext _context;
+        private readonly IMapper _mapper;
 
-        public ProductController(MyDbContext context)
+        public ProductController(MyDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [ActionName("AddCategory")]
         [HttpPost("/add-category")]
-        public async Task<ActionResult<Category>> Add(Category cate)
+        public async Task<ActionResult<CategoryResponse>> Add(CategoryCreate categoryRequest)
         {
+            Category cate = new Category();
+            cate.Id = categoryRequest.Id;
+            cate.Name = categoryRequest.Name;
+            cate.IsService = categoryRequest.IsService;
             _context.Categories.Add(cate);
             await _context.SaveChangesAsync();
-            return CreatedAtAction("AddCategory", new { id = cate.Id }, cate);
+            var categoryResponse = _mapper.Map<CategoryResponse>(cate);
+            return CreatedAtAction("AddCategory", new { id = cate.Id }, categoryResponse);
         }
     }
 }
