@@ -212,4 +212,10 @@ D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\obj\D
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\obj\Debug\net6.0\BikeService.pdb
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\obj\Debug\net6.0\BikeService.genruntimeconfig.cache
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\obj\Debug\net6.0\ref\BikeService.dll
+<<<<<<< HEAD
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Debug\net6.0\firebase-config.json
+=======
+D:\Users\Phuc\FPTUniversity\Fall2022\SWD\SWD_BikeService_BE\BikeService\BikeService\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Users\Phuc\FPTUniversity\Fall2022\SWD\SWD_BikeService_BE\BikeService\BikeService\bin\Debug\net6.0\AutoMapper.dll
+D:\Users\Phuc\FPTUniversity\Fall2022\SWD\SWD_BikeService_BE\BikeService\BikeService\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+>>>>>>> f13bd217f58bc987307d3c70629441402d1bc178

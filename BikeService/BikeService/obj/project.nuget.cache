@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "NJkQP2r0DEOtqavSstmarhKE/62r9VL4wvNjIr/+RwvfKUG6JMwzYU11jZJa6UVfgylV696X/c6VkCK0aumrPA==",
+  "dgSpecHash": "L8sMTJ4HHr/di3mnsQ8pJ1P5tXL+rEEH80567I+2OYDAw5cBsFs8kxPJn53ijIgGomp141rMsNFKXqGYxCRIYQ==",
   "success": true,
   "projectFilePath": "D:\\DocumentStudy\\SWD\\BE Project\\SWD_BikeService_BE\\BikeService\\BikeService\\BikeService.csproj",
   "expectedPackageFiles": [
@@ -10,9 +10,11 @@
     "C:\\Users\\ThienLong\\.nuget\\packages\\amazon.lambda.core\\2.1.0\\amazon.lambda.core.2.1.0.nupkg.sha512",
     "C:\\Users\\ThienLong\\.nuget\\packages\\amazon.lambda.logging.aspnetcore\\3.1.0\\amazon.lambda.logging.aspnetcore.3.1.0.nupkg.sha512",
     "C:\\Users\\ThienLong\\.nuget\\packages\\amazon.lambda.serialization.systemtextjson\\2.3.0\\amazon.lambda.serialization.systemtextjson.2.3.0.nupkg.sha512",
+    "C:\\Users\\ThienLong\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
+    "C:\\Users\\ThienLong\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\ThienLong\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ThienLong\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.0\\microsoft.aspnetcore.authentication.jwtbearer.6.0.0.nupkg.sha512",
-    "C:\\Users\\ThienLong\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\ThienLong\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\ThienLong\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\ThienLong\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
     "C:\\Users\\ThienLong\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.9\\microsoft.entityframeworkcore.6.0.9.nupkg.sha512",
