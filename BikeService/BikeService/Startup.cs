@@ -24,26 +24,42 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddControllers();
-        services.AddSwaggerGen();
-        services.AddCors();
-        services.AddControllers().AddJsonOptions(x =>
-        {
-            // serialize enums as strings in api responses (e.g. Role)
-            x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 
-            // ignore omitted parameters on models to enable optional params (e.g. User update)
-            x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-        });
+        //Swagger --------------------------------------
+        services.AddSwaggerGen();
+
+        //Mapper --------------------------------------
+        services.AddCors();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-        services.AddScoped <IManufacturerService, ManufacturerService>();
+        services.AddScoped <IAreaService, AreaService>();
+        services.AddScoped<IBrandService, BrandService>();
+        services.AddScoped<ICategoryService, CategoryService>();
+        services.AddScoped<ICustomerService, CustomerService>();
+        services.AddScoped<IDistrictService, DistrictService>();
+        services.AddScoped<IManufacturerService, ManufacturerService>();
+        services.AddScoped<IModelService, ModelService>();
+        services.AddScoped<IMotorbikeService, MotorbikeService>();
+        services.AddScoped<IOrderService, OrderService>();
+        services.AddScoped<IOrderDetailService, OrderDetailService>();
+        services.AddScoped<IPaymentService, PaymentService>();
+        services.AddScoped<IPaymentMethodService, PaymentMethodService>();
+        services.AddScoped<IProductService, ProductService>();
+        services.AddScoped<IStoreService, StoreService>();
+        services.AddScoped<IWardService, WardService>();
+
+        //Connect DB --------------------------------------
         services.AddDbContext<MyDbContext>(option =>
         {
             option.UseMySql(Configuration.GetConnectionString("DefaultConnection"),
             Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.23-mysql"));
         });
         services.AddEndpointsApiExplorer();
+
+
         //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddScheme<AuthenticationSchemeOptions, 
         //    FirebaseAuthenticationHandler>(JwtBearerDefaults.AuthenticationScheme, o => { });
+
+        //Authent get JWT String --------------------------------------
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
         {
             option.TokenValidationParameters = new TokenValidationParameters
