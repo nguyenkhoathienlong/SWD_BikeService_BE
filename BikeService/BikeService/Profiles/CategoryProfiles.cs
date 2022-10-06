@@ -4,7 +4,7 @@ using BikeService.Models;
 
 namespace BikeService.Profiles
 {
-    public class CategoryProfiles :Profile
+    public class CategoryProfiles : Profile
     {
         public CategoryProfiles()
         {

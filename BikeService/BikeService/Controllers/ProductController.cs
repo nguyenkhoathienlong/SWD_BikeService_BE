@@ -23,10 +23,9 @@ namespace BikeService.Controllers
 
         [ActionName("AddCategory")]
         [HttpPost("/add-category")]
-        public async Task<ActionResult<CategoryResponse>> Add(CategoryCreate categoryRequest)
+        public async Task<ActionResult<CategoryResponse>> Add(CategoryRequest categoryRequest)
         {
             Category cate = new Category();
-            cate.Id = categoryRequest.Id;
             cate.Name = categoryRequest.Name;
             cate.IsService = categoryRequest.IsService;
             _context.Categories.Add(cate);

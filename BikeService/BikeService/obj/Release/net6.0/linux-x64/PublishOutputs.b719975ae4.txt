@@ -2,6 +2,7 @@ D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\R
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Release\net6.0\publish\appsettings.Development.json
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Release\net6.0\publish\appsettings.json
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Release\net6.0\publish\aws-lambda-tools-defaults.json
+D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Release\net6.0\publish\firebase-config.json
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Release\net6.0\publish\BikeService.runtimeconfig.json
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Release\net6.0\publish\BikeService.pdb
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Release\net6.0\publish\Microsoft.Extensions.Caching.Memory.dll
@@ -11,6 +12,9 @@ D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\R
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Release\net6.0\publish\Amazon.Lambda.Core.dll
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Release\net6.0\publish\Amazon.Lambda.Logging.AspNetCore.dll
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Release\net6.0\publish\Amazon.Lambda.Serialization.SystemTextJson.dll
+D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Release\net6.0\publish\AutoMapper.dll
+D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Release\net6.0\publish\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Release\net6.0\publish\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Release\net6.0\publish\Microsoft.Data.SqlClient.dll
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Release\net6.0\publish\Microsoft.EntityFrameworkCore.dll
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Release\net6.0\publish\Microsoft.EntityFrameworkCore.Abstractions.dll
