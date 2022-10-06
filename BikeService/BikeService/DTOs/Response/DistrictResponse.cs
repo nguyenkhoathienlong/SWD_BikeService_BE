@@ -1,5 +1,4 @@
-﻿using BikeService.Models;
-
+﻿
 namespace BikeService.DTOs.Response
 {
     public class DistrictResponse
