@@ -212,3 +212,4 @@ D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\obj\D
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\obj\Debug\net6.0\BikeService.pdb
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\obj\Debug\net6.0\BikeService.genruntimeconfig.cache
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\obj\Debug\net6.0\ref\BikeService.dll
+D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Debug\net6.0\firebase-config.json
