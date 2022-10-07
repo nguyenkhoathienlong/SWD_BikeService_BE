@@ -1,5 +1,8 @@
-﻿using BikeService.Data;
+﻿using AutoMapper;
+using BikeService.Data;
 using BikeService.Models;
+using BikeService.Models.Request;
+using BikeService.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,26 +12,49 @@ namespace BikeService.Controllers
     [ApiController]
     public class MotoBikeController : ControllerBase
     {
-        private readonly MyDbContext _context;
+        private readonly IMapper _mapper;
+        private IMotorbikeService _motorbikeService;
 
-        public MotoBikeController(MyDbContext context)
+        public MotoBikeController(IMotorbikeService motorbikeService, IMapper mapper)
         {
-            _context = context;
+            _motorbikeService = motorbikeService;
+            _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Motorbike>>> getAllMotor()
+        [HttpGet("get-all-motorbike")]
+        public IActionResult getAllMotorbike()
         {
-            return await _context.Motorbikes.ToListAsync();
+            var motorbike = _motorbikeService.GetAll();
+            return Ok(motorbike);
         }
 
-        [ActionName("GetMotorbike")]
-        [HttpPost("/add-motorbike")]
-        public async Task<ActionResult<Motorbike>> Add(Motorbike moto)
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
         {
-            _context.Motorbikes.Add(moto);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction("GetMotorbike", new { id = moto.Id }, moto);
+            var motorbike = _motorbikeService.GetById(id);
+            return Ok(motorbike);
+        }
+
+        [HttpPost("add-motorbike")]
+        public IActionResult Create(MotorbikeRequest motorbikeRequest)
+        {
+            _motorbikeService.Create(motorbikeRequest);
+            return Ok(motorbikeRequest);
+
+        }
+
+        [HttpPut("update-infomation/{id}")]
+        public IActionResult Update(int id, MotorbikeRequest motorbikeRequest)
+        {
+            _motorbikeService.Update(id, motorbikeRequest);
+            return Ok(motorbikeRequest);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _motorbikeService.Delete(id);
+            return Ok(id);
         }
 
     }

@@ -10,6 +10,7 @@ public interface IProductService
 {
     IEnumerable<Product> GetAll();
     Product GetById(int id);
+    IEnumerable<Product> GetByName(string name);
     void Create(ProductRequest productRequest);
     void Update(int id, ProductRequest productRequest);
     void Delete(int id);
@@ -49,6 +50,16 @@ public class ProductService : IProductService
     public Product GetById(int id)
     {
         return getProductId(id);
+    }
+
+    public IEnumerable<Product> GetByName(string name)
+    {
+        IQueryable<Product> query = _context.Products;
+        if (!string.IsNullOrEmpty(name))
+        {
+            query = query.Where(x => x.Name.Contains(name));
+        }
+        return query.ToList();
     }
 
     public void Update(int id, ProductRequest productRequest)

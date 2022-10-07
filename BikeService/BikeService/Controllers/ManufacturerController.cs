@@ -27,6 +27,13 @@ namespace BikeService.Controllers
             return Ok(manufacturer);
         }
 
+        [HttpGet("/search-manufacturer/{name}")]
+        public IActionResult searchByName(string name)
+        {
+            var manufacturer = _manufacturerService.GetByName(name);
+            return Ok(manufacturer);
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -35,27 +42,25 @@ namespace BikeService.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Manufacturer>>Create(ManufacturerRequest manufactureRequest)
+        public IActionResult Create(ManufacturerRequest manufactureRequest)
         {
             _manufacturerService.Create(manufactureRequest);
-            return Ok(new { message = "Created!!" });
+            return Ok(manufactureRequest);
+
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, ManufacturerRequest manufactureRequest)
         {
             _manufacturerService.Update(id, manufactureRequest);
-            return Ok(new { message = "Updated" });
+            return Ok(manufactureRequest);
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             _manufacturerService.Delete(id);
-            return Ok(new { message = "Deleted" });
+            return Ok(id);
         }
-
-
-
     }
 }

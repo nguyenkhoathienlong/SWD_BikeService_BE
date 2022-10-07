@@ -2,6 +2,7 @@
 using BikeService.Data;
 using BikeService.Models;
 using BikeService.Models.Request;
+using BikeService.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BikeService.Controllers
@@ -10,40 +11,131 @@ namespace BikeService.Controllers
     [ApiController]
     public class LocationContoller : ControllerBase
     {
-        private readonly MyDbContext _context;
         private readonly IMapper _mapper;
+        private IAreaService _areaService;
+        private IWardService _wardService;
+        private IDistrictService _districtService;
 
-        public LocationContoller(MyDbContext context, IMapper mapper)
+        public LocationContoller(IAreaService areaService, IMapper mapper, IDistrictService districtService, IWardService wardService)
         {
-            _context = context;
+            _areaService = areaService;
             _mapper = mapper;
+            _districtService = districtService;
+            _wardService = wardService;
         }
 
-        [ActionName("AddArea")] //CREATE
+        // Area -----------------------------------------
+
+        [HttpGet("/get-all-area")]
+        public IActionResult getAllArea()
+        {
+            var area = _areaService.GetAll();
+            return Ok(area);
+        }
+
+        [HttpGet("/area/{id}")]
+        public IActionResult GetAreaById(int id)
+        {
+            var area = _areaService.GetById(id);
+            return Ok(area);
+        }
+
         [HttpPost("/add-area")]
-        public async Task<ActionResult<Area>> Add(AreaRequest areaRequest)
+        public IActionResult Create(AreaRequest areaRequest)
         {
-            Area area = new Area();
-            area.Name = areaRequest.Name;
-            _context.Areas.Add(area);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction("AddArea", new { id = area.Id }, areaRequest);
+            _areaService.Create(areaRequest);
+            return Ok(areaRequest);
+
         }
 
-
-        [ActionName("UpdateArea")] //UPDATE
         [HttpPut("/update-area/{id}")]
-        public async Task<ActionResult<Area>> Update(int id, AreaRequest areaRequest)
+        public IActionResult Update(int id, AreaRequest areaRequest)
         {
-            return null;
+            _areaService.Update(id, areaRequest);
+            return Ok(areaRequest);
         }
 
-        [ActionName("DeleteArea")]
-        [HttpDelete("delete-area/{id}")]
-        public async Task<ActionResult<Area>> Delete(int id, Area area)
+        [HttpDelete("/area/{id}")]
+        public IActionResult DeleteArea(int id)
         {
-            return null;
+            _areaService.Delete(id);
+            return Ok(id);
         }
 
+        // Ward -----------------------------------------
+
+        [HttpGet("/get-all-ward")]
+        public IActionResult getAllWard()
+        {
+            var ward = _wardService.GetAll();
+            return Ok(ward);
+        }
+
+        [HttpGet("/ward/{id}")]
+        public IActionResult GetWardById(int id)
+        {
+            var ward = _wardService.GetById(id);
+            return Ok(ward);
+        }
+
+        [HttpPost("/add-ward")]
+        public IActionResult Create(WardRequest wardRequest)
+        {
+            _wardService.Create(wardRequest);
+            return Ok(wardRequest);
+
+        }
+
+        [HttpPut("/update-ward/{id}")]
+        public IActionResult Update(int id, WardRequest wardRequest)
+        {
+            _wardService.Update(id, wardRequest);
+            return Ok(wardRequest);
+        }
+
+        [HttpDelete("/ward/{id}")]
+        public IActionResult DeleteWard(int id)
+        {
+            _wardService.Delete(id);
+            return Ok(id);
+        }
+
+        // District -----------------------------------------
+
+        [HttpGet("/get-all-district")]
+        public IActionResult getAllDistrict()
+        {
+            var district = _districtService.GetAll();
+            return Ok(district);
+        }
+
+        [HttpGet("/district/{id}")]
+        public IActionResult GetDistrictById(int id)
+        {
+            var district = _districtService.GetById(id);
+            return Ok(district);
+        }
+
+        [HttpPost("/add-district")]
+        public IActionResult Create(DistrictRequest districtRequest)
+        {
+            _districtService.Create(districtRequest);
+            return Ok(districtRequest);
+
+        }
+
+        [HttpPut("/update-district/{id}")]
+        public IActionResult Update(int id, DistrictRequest districtRequest)
+        {
+            _districtService.Update(id, districtRequest);
+            return Ok(districtRequest);
+        }
+
+        [HttpDelete("/district/{id}")]
+        public IActionResult DeleteDistrict(int id)
+        {
+            _districtService.Delete(id);
+            return Ok(id);
+        }
     }
 }

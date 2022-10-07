@@ -3,6 +3,7 @@ using BikeService.Data;
 using BikeService.Models;
 using BikeService.Models.Request;
 using BikeService.Models.Response;
+using BikeService.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BikeService.Controllers
@@ -11,26 +12,56 @@ namespace BikeService.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly MyDbContext _context;
         private readonly IMapper _mapper;
+        private IProductService _productService;
 
-        public ProductController(MyDbContext context, IMapper mapper)
+        public ProductController(IProductService productService, IMapper mapper)
         {
-            _context = context;
+            _productService = productService;
             _mapper = mapper;
         }
 
-        [ActionName("AddCategory")]
-        [HttpPost("/add-category")]
-        public async Task<ActionResult<CategoryResponse>> Add(CategoryRequest categoryRequest)
+        [HttpGet("/get-all-product")]
+        public IActionResult getAllProduct()
         {
-            Category cate = new Category();
-            cate.Name = categoryRequest.Name;
-            cate.IsService = categoryRequest.IsService;
-            _context.Categories.Add(cate);
-            await _context.SaveChangesAsync();
-            var categoryResponse = _mapper.Map<CategoryResponse>(cate);
-            return CreatedAtAction("AddCategory", new { id = cate.Id }, categoryResponse);
+            var Product = _productService.GetAll();
+            return Ok(Product);
+        }
+
+        [HttpGet("/search-product/{name}")]
+        public IActionResult searchByName(string name)
+        {
+            var Product = _productService.GetByName(name);
+            return Ok(Product);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var Product = _productService.GetById(id);
+            return Ok(Product);
+        }
+
+        [HttpPost]
+        public IActionResult Create(ProductRequest productRequest)
+        {
+            _productService.Create(productRequest);
+            return Ok(productRequest);
+
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, ProductRequest productRequest)
+        {
+            _productService.Update(id, productRequest);
+            return Ok(productRequest);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _productService.Delete(id);
+            return Ok(id);
         }
     }
 }

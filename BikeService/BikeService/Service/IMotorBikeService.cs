@@ -2,13 +2,14 @@
 using AutoMapper;
 using BikeService.Data;
 using BikeService.Models;
+using BikeService.Models.Request;
 
 public interface IMotorbikeService
 {
     IEnumerable<Motorbike> GetAll();
     Motorbike GetById(int id);
-    void Create(Motorbike Motorbike);
-    void Update(int id, Motorbike Motorbike);
+    void Create(MotorbikeRequest motorbikeRequest);
+    void Update(int id, MotorbikeRequest motorbikeRequest);
     void Delete(int id);
 }
 
@@ -24,8 +25,9 @@ public class MotorbikeService : IMotorbikeService
         _mapper = mapper;
     }
 
-    public void Create(Motorbike motorbike)
+    public void Create(MotorbikeRequest motorbikeRequest)
     {
+        var motorbike = _mapper.Map<Motorbike>(motorbikeRequest);
         _context.Motorbikes.Add(motorbike);
         _context.SaveChanges();
     }
@@ -47,11 +49,11 @@ public class MotorbikeService : IMotorbikeService
         return getMotorbikeId(id);
     }
 
-    public void Update(int id, Motorbike motorbike)
+    public void Update(int id, MotorbikeRequest motorbikeRequest)
     {
-        var motorbikeId = getMotorbikeId;
-        _mapper.Map(motorbike, motorbikeId);
-        _context.Update(motorbike);
+        var motorbikeId = getMotorbikeId(id);
+        _mapper.Map(motorbikeRequest, motorbikeId);
+        _context.Update(motorbikeId);
         _context.SaveChanges();
     }
 

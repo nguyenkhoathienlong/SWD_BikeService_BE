@@ -8,6 +8,7 @@ public interface IManufacturerService
 {
     IEnumerable<Manufacturer> GetAll();
     Manufacturer GetById(int id);
+    IEnumerable<Manufacturer> GetByName(string name);
     void Create(ManufacturerRequest manufacturerRequest);
     void Update(int id, ManufacturerRequest manufacturerRequest);
     void Delete(int id);
@@ -47,6 +48,16 @@ public class ManufacturerService : IManufacturerService
     public Manufacturer GetById(int id)
     {
         return getManufacturerId(id);
+    }
+
+    public IEnumerable<Manufacturer> GetByName(string name)
+    {
+        IQueryable<Manufacturer> query = _context.Manufacturers;
+        if (!string.IsNullOrEmpty(name))
+        {
+            query = query.Where(x => x.Name.Contains(name));
+        }
+        return query.ToList();
     }
 
     public void Update(int id, ManufacturerRequest manufacturerRequest)
