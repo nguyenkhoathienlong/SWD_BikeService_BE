@@ -10,12 +10,12 @@ namespace BikeService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MotoBikeController : ControllerBase
+    public class MotorBikeController : ControllerBase
     {
         private readonly IMapper _mapper;
         private IMotorbikeService _motorbikeService;
 
-        public MotoBikeController(IMotorbikeService motorbikeService, IMapper mapper)
+        public MotorBikeController(IMotorbikeService motorbikeService, IMapper mapper)
         {
             _motorbikeService = motorbikeService;
             _mapper = mapper;

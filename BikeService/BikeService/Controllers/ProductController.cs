@@ -21,14 +21,14 @@ namespace BikeService.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("/get-all-product")]
+        [HttpGet("get-all-product")]
         public IActionResult getAllProduct()
         {
             var Product = _productService.GetAll();
             return Ok(Product);
         }
 
-        [HttpGet("/search-product/{name}")]
+        [HttpGet("search-product/{name}")]
         public IActionResult searchByName(string name)
         {
             var Product = _productService.GetByName(name);

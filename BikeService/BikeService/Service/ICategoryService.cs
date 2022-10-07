@@ -8,6 +8,7 @@ public interface ICategoryService
 {
     IEnumerable<Category> GetAll();
     Category GetById(int id);
+    IEnumerable<Category> GetByName(string name);
     void Create(CategoryRequest categoryRequest);
     void Update(int id, CategoryRequest categoryRequest);
     void Delete(int id);
@@ -47,6 +48,16 @@ public class CategoryService : ICategoryService
     public Category GetById(int id)
     {
         return getCategoryId(id);
+    }
+
+    public IEnumerable<Category> GetByName(string name)
+    {
+        IQueryable<Category> query = _context.Categories;
+        if (!string.IsNullOrEmpty(name))
+        {
+            query = query.Where(x => x.Name.Contains(name));
+        }
+        return query.ToList();
     }
 
     public void Update(int id, CategoryRequest categoryRequest)
