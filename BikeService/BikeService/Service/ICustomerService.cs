@@ -3,6 +3,7 @@ using AutoMapper;
 using BikeService.Data;
 using BikeService.Models;
 using BikeService.Models.Request;
+using BikeService.Helpers;
 
 public interface ICustomerService
 {
@@ -27,6 +28,14 @@ public class CustomerService : ICustomerService
 
     public void Create(CustomerRequest customerRequest)
     {
+        if (_context.Customers.Any(x => x.Email == customerRequest.Email)) 
+        {
+            throw new ThrowingException("Email " + customerRequest.Email + " already exists!"); 
+        }
+        if (_context.Customers.Any(x => x.PhoneNumber == customerRequest.PhoneNumber))
+        {
+            throw new ThrowingException("Your phone number " + customerRequest.PhoneNumber + " already exists!");
+        }
         var customer = _mapper.Map<Customer>(customerRequest);
         _context.Customers.Add(customer);
         _context.SaveChanges();
@@ -51,6 +60,14 @@ public class CustomerService : ICustomerService
 
     public void Update(int id, CustomerRequest customerRequest)
     {
+        if (_context.Customers.Any(x => x.Email == customerRequest.Email))
+        {
+            throw new ThrowingException("Your email " + customerRequest.Email + " will not change!");
+        }
+        if (_context.Customers.Any(x => x.PhoneNumber == customerRequest.PhoneNumber))
+        {
+            throw new ThrowingException("Your phone number " + customerRequest.PhoneNumber + " will not change!");
+        }
         var customer = getCustomerId(id);
         _mapper.Map(customerRequest, customer);
         _context.Update(customer);

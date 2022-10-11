@@ -1,4 +1,5 @@
 using BikeService.Data;
+using BikeService.Helpers;
 using BikeService.Models;
 using BikeService.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -27,7 +28,6 @@ public class Startup
         services.AddSwaggerGen();
 
         //Mapper --------------------------------------
-        services.AddCors();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         services.AddScoped <IAreaService, AreaService>();
         services.AddScoped<IBrandService, BrandService>();
@@ -71,6 +71,13 @@ public class Startup
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
             };
         });
+
+        // Add Cors --------------------------------------
+        //services.AddCors();
+        services.AddCors(p => p.AddPolicy("corspolicy", build =>
+        {
+            build.WithOrigins("https://localhost:64391", "http://localhost:64392").AllowAnyMethod().AllowAnyHeader();
+        }));
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -98,9 +105,9 @@ public class Startup
             .AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader());
-            //app.MapControllers();
-            // global error handler
-            //app.UseMiddleware<ErrorHandlerMiddleware>();
+            app.UseCors("corspolicy");
+            //global error handler
+            app.UseMiddleware<ErrorHandlerMiddleware>();
         }
         app.UseEndpoints(endpoints =>
         {
