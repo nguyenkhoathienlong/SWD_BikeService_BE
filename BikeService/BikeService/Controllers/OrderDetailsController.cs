@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BikeService.Models.Request;
 using BikeService.Service;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace BikeService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("corspolicy")]
     public class OrderDetailsController : ControllerBase
     {
         private readonly IMapper _mapper;

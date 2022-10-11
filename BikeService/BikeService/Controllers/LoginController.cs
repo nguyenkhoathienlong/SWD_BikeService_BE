@@ -1,5 +1,6 @@
 ﻿using BikeService.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -10,6 +11,7 @@ namespace BikeService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("corspolicy")]
     public class LoginController : ControllerBase
     {
         private readonly IConfiguration _config;

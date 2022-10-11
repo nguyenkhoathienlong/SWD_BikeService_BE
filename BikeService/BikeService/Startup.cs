@@ -76,7 +76,7 @@ public class Startup
         //services.AddCors();
         services.AddCors(p => p.AddPolicy("corspolicy", build =>
         {
-            build.WithOrigins("https://localhost:64391", "http://localhost:64392").AllowAnyMethod().AllowAnyHeader();
+            build.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
         }));
     }
 
@@ -102,7 +102,7 @@ public class Startup
         app.UseDeveloperExceptionPage();
         {
             app.UseCors(x => x
-            .AllowAnyOrigin()
+            .WithOrigins("*")
             .AllowAnyMethod()
             .AllowAnyHeader());
             app.UseCors("corspolicy");

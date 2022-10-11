@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
-using BikeService.Data;
-using BikeService.Models;
 using BikeService.Models.Request;
 using BikeService.Service;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BikeService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("corspolicy")]
     public class LocationContoller : ControllerBase
     {
         private readonly IMapper _mapper;

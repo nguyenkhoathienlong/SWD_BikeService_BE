@@ -3,6 +3,7 @@ using BikeService.Data;
 using BikeService.Models;
 using BikeService.Models.Request;
 using BikeService.Service;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,18 +11,20 @@ namespace BikeService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("corspolicy")]
     public class CustomerController : ControllerBase
     {
         private readonly IMapper _mapper;
         private ICustomerService _customerService;
 
+        
         public CustomerController(ICustomerService customerService, IMapper mapper)
         {
             _customerService = customerService;
             _mapper = mapper;
         }
 
-        [HttpGet("get-all-Customer")]
+        [HttpGet("get-all-customer")]
         public IActionResult getAllCustomer()
         {
             var Customer = _customerService.GetAll();
@@ -35,7 +38,7 @@ namespace BikeService.Controllers
             return Ok(Customer);
         }
 
-        [HttpPost("add-Customer")]
+        [HttpPost("add-customer")]
         public IActionResult Create(CustomerRequest customerService)
         {
             _customerService.Create(customerService);
@@ -43,7 +46,7 @@ namespace BikeService.Controllers
 
         }
 
-        [HttpPut("update-infomation/{id}")]
+        [HttpPut("update-customer-infomation/{id}")]
         public IActionResult Update(int id, CustomerRequest customerService)
         {
             _customerService.Update(id, customerService);
