@@ -10,6 +10,7 @@ public interface IStoreService
 {
     IEnumerable<Store> GetAll();
     Store GetById(int id);
+    IEnumerable<Store> GetByName(string name);
     void Create(StoreRequest storeRequest);
     void Update(int id, StoreRequest storeRequest);
     void Delete(int id);
@@ -49,6 +50,16 @@ public class StoreService : IStoreService
     public Store GetById(int id)
     {
         return getStoreId(id);
+    }
+
+    public IEnumerable<Store> GetByName(string name)
+    {
+        IQueryable<Store> query = _context.Stores;
+        if (!string.IsNullOrEmpty(name))
+        {
+            query = query.Where(x => x.Name.Contains(name));
+        }
+        return query.ToList();
     }
 
     public void Update(int id, StoreRequest storeRequest)

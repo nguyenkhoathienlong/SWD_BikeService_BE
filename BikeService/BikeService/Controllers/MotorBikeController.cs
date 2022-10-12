@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
-using BikeService.Data;
-using BikeService.Models;
+using BikeService.Helpers;
 using BikeService.Models.Request;
 using BikeService.Service;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BikeService.Controllers
 {
@@ -40,16 +38,24 @@ namespace BikeService.Controllers
         [HttpPost("add-motorbike")]
         public IActionResult Create(MotorbikeRequest motorbikeRequest)
         {
-            _motorbikeService.Create(motorbikeRequest);
-            return Ok(motorbikeRequest);
+            if (ModelState.IsValid)
+            {
+                _motorbikeService.Create(motorbikeRequest);
+                return Ok(motorbikeRequest);
+            }
+            return Ok(new ThrowingException("Please double check the data!!!"));
 
         }
 
         [HttpPut("update-infomation/{id}")]
         public IActionResult Update(int id, MotorbikeRequest motorbikeRequest)
         {
-            _motorbikeService.Update(id, motorbikeRequest);
-            return Ok(motorbikeRequest);
+            if (ModelState.IsValid)
+            {
+                _motorbikeService.Update(id, motorbikeRequest);
+                return Ok(motorbikeRequest);
+            }
+            return Ok(new ThrowingException("Please double check the data!!!"));
         }
 
         [HttpDelete("{id}")]

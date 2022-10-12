@@ -51,7 +51,7 @@ public class AreaService : IAreaService
 
     public void Update(int id, AreaRequest areaRequest)
     {
-        var area = getAreaId(id);   
+        var area = getAreaId(id);
         _mapper.Map(areaRequest, area);
         _context.Update(area);
         _context.SaveChanges();

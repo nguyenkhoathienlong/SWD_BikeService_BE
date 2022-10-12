@@ -1,9 +1,9 @@
 ﻿namespace BikeService.Service;
 using AutoMapper;
 using BikeService.Data;
+using BikeService.Helpers;
 using BikeService.Models;
 using BikeService.Models.Request;
-using BikeService.Helpers;
 
 public interface ICustomerService
 {
@@ -28,9 +28,9 @@ public class CustomerService : ICustomerService
 
     public void Create(CustomerRequest customerRequest)
     {
-        if (_context.Customers.Any(x => x.Email == customerRequest.Email)) 
+        if (_context.Customers.Any(x => x.Email == customerRequest.Email))
         {
-            throw new ThrowingException("Email " + customerRequest.Email + " already exists!"); 
+            throw new ThrowingException("Email " + customerRequest.Email + " already exists!");
         }
         if (_context.Customers.Any(x => x.PhoneNumber == customerRequest.PhoneNumber))
         {

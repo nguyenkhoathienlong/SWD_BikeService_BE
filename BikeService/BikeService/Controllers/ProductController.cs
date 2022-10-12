@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
-using BikeService.Data;
-using BikeService.Models;
+using BikeService.Helpers;
 using BikeService.Models.Request;
-using BikeService.Models.Response;
 using BikeService.Service;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using System.Xml.Linq;
 
 namespace BikeService.Controllers
 {
@@ -33,8 +32,12 @@ namespace BikeService.Controllers
         [HttpGet("search-product/{name}")]
         public IActionResult searchByName(string name)
         {
-            var Product = _productService.GetByName(name);
-            return Ok(Product);
+            if (ModelState.IsValid)
+            {
+                var Product = _productService.GetByName(name);
+                return Ok(Product);
+            }
+            return Ok(new ThrowingException("Please double check the data!!!"));
         }
 
         [HttpGet("{id}")]
@@ -47,16 +50,23 @@ namespace BikeService.Controllers
         [HttpPost]
         public IActionResult Create(ProductRequest productRequest)
         {
-            _productService.Create(productRequest);
-            return Ok(productRequest);
-
+            if (ModelState.IsValid)
+            {
+                _productService.Create(productRequest);
+                return Ok(productRequest);
+            }
+            return Ok(new ThrowingException("Please double check the data!!!"));
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, ProductRequest productRequest)
         {
-            _productService.Update(id, productRequest);
-            return Ok(productRequest);
+            if (ModelState.IsValid)
+            {
+                _productService.Update(id, productRequest);
+                return Ok(productRequest);
+            }
+            return Ok(new ThrowingException("Please double check the data!!!"));
         }
 
         [HttpDelete("{id}")]

@@ -1,12 +1,10 @@
 using BikeService.Data;
 using BikeService.Helpers;
-using BikeService.Models;
 using BikeService.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using System.Text.Json.Serialization;
 
 namespace BikeService;
 
@@ -29,7 +27,7 @@ public class Startup
 
         //Mapper --------------------------------------
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-        services.AddScoped <IAreaService, AreaService>();
+        services.AddScoped<IAreaService, AreaService>();
         services.AddScoped<IBrandService, BrandService>();
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<ICustomerService, CustomerService>();

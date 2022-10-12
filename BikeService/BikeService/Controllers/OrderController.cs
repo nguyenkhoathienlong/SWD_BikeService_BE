@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
-using BikeService.Models;
+using BikeService.Helpers;
 using BikeService.Models.Request;
 using BikeService.Service;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BikeService.Controllers
@@ -39,16 +38,23 @@ namespace BikeService.Controllers
         [HttpPost]
         public IActionResult Create(OrderRequest orderRequest)
         {
-            _orderService.Create(orderRequest);
-            return Ok(orderRequest);
-
+            if (ModelState.IsValid)
+            {
+                _orderService.Create(orderRequest);
+                return Ok(orderRequest);
+            }
+            return Ok(new ThrowingException("Please double check the data!!!"));
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, OrderRequest orderRequest)
         {
-            _orderService.Update(id, orderRequest);
-            return Ok(orderRequest);
+            if (ModelState.IsValid)
+            {
+                _orderService.Update(id, orderRequest);
+                return Ok(orderRequest);
+            }
+            return Ok(new ThrowingException("Please double check the data!!!")); 
         }
 
         [HttpDelete("{id}")]

@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using BikeService.Data;
-using BikeService.Models;
 using BikeService.Models.Request;
 using BikeService.Service;
+using BikeService.Helpers;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -46,16 +45,24 @@ namespace BikeService.Controllers
         [HttpPost]
         public IActionResult Create(ManufacturerRequest manufactureRequest)
         {
-            _manufacturerService.Create(manufactureRequest);
-            return Ok(manufactureRequest);
+            if (ModelState.IsValid)
+            {
+                _manufacturerService.Create(manufactureRequest);
+                return Ok(manufactureRequest);
+            }
+            return Ok(new ThrowingException("Please double check the data!!!"));
 
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, ManufacturerRequest manufactureRequest)
         {
-            _manufacturerService.Update(id, manufactureRequest);
-            return Ok(manufactureRequest);
+            if (ModelState.IsValid)
+            {
+                _manufacturerService.Update(id, manufactureRequest);
+                return Ok(manufactureRequest);
+            }
+            return Ok(new ThrowingException("Please double check the data!!!"));
         }
 
         [HttpDelete("{id}")]

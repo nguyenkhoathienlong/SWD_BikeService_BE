@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BikeService.Helpers;
 using BikeService.Models.Request;
 using BikeService.Service;
 using Microsoft.AspNetCore.Cors;
@@ -23,37 +24,48 @@ namespace BikeService.Controllers
         [HttpGet("get-all-store")]
         public IActionResult getAllStore()
         {
-            var Store = _storeService.GetAll();
-            return Ok(Store);
+            var store = _storeService.GetAll();
+            return Ok(store);
         }
 
-        //[HttpGet("search-Store/{name}")]
-        //public IActionResult searchByName(string name)
-        //{
-        //    var Store = _storeService.GetByName(name);
-        //    return Ok(Store);
-        //}
+        [HttpGet("search-Store/{name}")]
+        public IActionResult searchByName(string name)
+        {
+            if (ModelState.IsValid)
+            {
+                var store = _storeService.GetByName(name);
+                return Ok(store);
+            }
+            return Ok(new ThrowingException("Please double check the data!!!"));
+        }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var Store = _storeService.GetById(id);
-            return Ok(Store);
+            var store = _storeService.GetById(id);
+            return Ok(store);
         }
 
         [HttpPost]
         public IActionResult Create(StoreRequest storeRequest)
         {
-            _storeService.Create(storeRequest);
-            return Ok(storeRequest);
-
+            if (ModelState.IsValid)
+            {
+                _storeService.Create(storeRequest);
+                return Ok(storeRequest);
+            }
+            return Ok(new ThrowingException("Please double check the data!!!"));
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, StoreRequest storeRequest)
         {
-            _storeService.Update(id, storeRequest);
-            return Ok(storeRequest);
+            if (ModelState.IsValid)
+            {
+                _storeService.Update(id, storeRequest);
+                return Ok(storeRequest);
+            }
+            return Ok(new ThrowingException("Please double check the data!!!"));
         }
 
         [HttpDelete("{id}")]

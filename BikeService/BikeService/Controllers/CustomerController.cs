@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
-using BikeService.Data;
-using BikeService.Models;
+using BikeService.Helpers;
 using BikeService.Models.Request;
 using BikeService.Service;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BikeService.Controllers
 {
@@ -17,7 +15,7 @@ namespace BikeService.Controllers
         private readonly IMapper _mapper;
         private ICustomerService _customerService;
 
-        
+
         public CustomerController(ICustomerService customerService, IMapper mapper)
         {
             _customerService = customerService;
@@ -41,16 +39,23 @@ namespace BikeService.Controllers
         [HttpPost("add-customer")]
         public IActionResult Create(CustomerRequest customerService)
         {
-            _customerService.Create(customerService);
-            return Ok(customerService);
-
+            if (ModelState.IsValid)
+            {
+                _customerService.Create(customerService);
+                return Ok(customerService);
+            }
+            return Ok(new ThrowingException("Please double check the data!!!"));
         }
 
         [HttpPut("update-customer-infomation/{id}")]
         public IActionResult Update(int id, CustomerRequest customerService)
         {
-            _customerService.Update(id, customerService);
-            return Ok(customerService);
+            if (ModelState.IsValid)
+            {
+                _customerService.Update(id, customerService);
+                return Ok(customerService);
+            }
+            return Ok(new ThrowingException("Please double check the data!!!"));
         }
 
         [HttpDelete("{id}")]

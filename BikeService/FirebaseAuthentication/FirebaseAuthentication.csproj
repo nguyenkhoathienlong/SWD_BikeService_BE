@@ -8,6 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Profiles\**" />
+    <Compile Remove="Response\**" />
+    <EmbeddedResource Remove="Profiles\**" />
+    <EmbeddedResource Remove="Response\**" />
+    <None Remove="Profiles\**" />
+    <None Remove="Response\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FirebaseAuthentication.net" Version="3.7.2" />
   </ItemGroup>
 

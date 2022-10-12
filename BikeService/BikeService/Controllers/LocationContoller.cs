@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BikeService.Helpers;
 using BikeService.Models.Request;
 using BikeService.Service;
 using Microsoft.AspNetCore.Cors;
@@ -43,16 +44,23 @@ namespace BikeService.Controllers
         [HttpPost("/add-area")]
         public IActionResult Create(AreaRequest areaRequest)
         {
-            _areaService.Create(areaRequest);
-            return Ok(areaRequest);
-
+            if (ModelState.IsValid)
+            {
+                _areaService.Create(areaRequest);
+                return Ok(areaRequest);
+            }
+            return Ok(new ThrowingException("Please double check the data!!!"));
         }
 
         [HttpPut("/update-area/{id}")]
         public IActionResult Update(int id, AreaRequest areaRequest)
         {
-            _areaService.Update(id, areaRequest);
-            return Ok(areaRequest);
+            if (ModelState.IsValid)
+            {
+                _areaService.Update(id, areaRequest);
+                return Ok(areaRequest);
+            }
+            return Ok(new ThrowingException("Please double check the data!!!"));
         }
 
         [HttpDelete("/area/{id}")]
@@ -81,16 +89,23 @@ namespace BikeService.Controllers
         [HttpPost("/add-ward")]
         public IActionResult Create(WardRequest wardRequest)
         {
-            _wardService.Create(wardRequest);
-            return Ok(wardRequest);
-
+            if (ModelState.IsValid)
+            {
+                _wardService.Create(wardRequest);
+                return Ok(wardRequest);
+            }
+            return Ok(new ThrowingException("Please double check the data!!!"));
         }
 
         [HttpPut("/update-ward/{id}")]
         public IActionResult Update(int id, WardRequest wardRequest)
         {
-            _wardService.Update(id, wardRequest);
-            return Ok(wardRequest);
+            if (ModelState.IsValid)
+            {
+                _wardService.Update(id, wardRequest);
+                return Ok(wardRequest);
+            }
+            return Ok(new ThrowingException("Please double check the data!!!"));
         }
 
         [HttpDelete("/ward/{id}")]
@@ -119,16 +134,23 @@ namespace BikeService.Controllers
         [HttpPost("/add-district")]
         public IActionResult Create(DistrictRequest districtRequest)
         {
-            _districtService.Create(districtRequest);
-            return Ok(districtRequest);
-
+            if (ModelState.IsValid)
+            {
+                _districtService.Create(districtRequest);
+                return Ok(districtRequest);
+            }
+            return Ok(new ThrowingException("Please double check the data!!!"));
         }
 
         [HttpPut("/update-district/{id}")]
         public IActionResult Update(int id, DistrictRequest districtRequest)
         {
-            _districtService.Update(id, districtRequest);
-            return Ok(districtRequest);
+            if (ModelState.IsValid)
+            {
+                _districtService.Update(id, districtRequest);
+                return Ok(districtRequest);
+            }
+            return Ok(new ThrowingException("Please double check the data!!!"));
         }
 
         [HttpDelete("/district/{id}")]

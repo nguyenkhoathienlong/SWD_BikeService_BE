@@ -2,7 +2,6 @@
 using AutoMapper;
 using BikeService.Data;
 using BikeService.Models;
-using BikeService.Models.Request;
 
 public interface IModelService
 {
