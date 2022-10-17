@@ -28,7 +28,7 @@ namespace BikeService.Controllers
             return Ok(store);
         }
 
-        [HttpGet("search-Store/{name}")]
+        [HttpGet("search-store/{name}")]
         public IActionResult searchByName(string name)
         {
             if (ModelState.IsValid)

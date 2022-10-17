@@ -4,7 +4,6 @@ using BikeService.Models.Request;
 using BikeService.Service;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using System.Xml.Linq;
 
 namespace BikeService.Controllers
 {

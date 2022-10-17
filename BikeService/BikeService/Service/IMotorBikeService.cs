@@ -3,10 +3,11 @@ using AutoMapper;
 using BikeService.Data;
 using BikeService.Models;
 using BikeService.Models.Request;
+using Microsoft.EntityFrameworkCore;
 
 public interface IMotorbikeService
 {
-    IEnumerable<Motorbike> GetAll();
+    IEnumerable<MotorbikeCustomer> GetAll();
     Motorbike GetById(int id);
     void Create(MotorbikeRequest motorbikeRequest);
     void Update(int id, MotorbikeRequest motorbikeRequest);
@@ -39,9 +40,18 @@ public class MotorbikeService : IMotorbikeService
         _context.SaveChanges();
     }
 
-    public IEnumerable<Motorbike> GetAll()
+    public IEnumerable<MotorbikeCustomer> GetAll()
     {
-        return _context.Motorbikes;
+
+        var bike = _context.Motorbikes.Where(x => true).Include(x => x.Customer).Select(x => new MotorbikeCustomer
+        {
+            CustomerName = x.Customer.Name,
+            PhoneNumber = x.Customer.PhoneNumber,
+            Email = x.Customer.Email,
+            LicensePlate = x.LicensePlate
+        }).ToList();
+        return bike;
+
     }
 
     public Motorbike GetById(int id)

@@ -2,6 +2,7 @@
 using BikeService.Helpers;
 using BikeService.Models.Request;
 using BikeService.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,7 @@ namespace BikeService.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("corspolicy")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class CustomerController : ControllerBase
     {
         private readonly IMapper _mapper;

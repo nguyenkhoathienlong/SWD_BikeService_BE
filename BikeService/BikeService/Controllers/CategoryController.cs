@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
+using BikeService.Helpers;
 using BikeService.Models.Request;
 using BikeService.Service;
-using BikeService.Helpers;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using System.Xml.Linq;
 
 namespace BikeService.Controllers
 {

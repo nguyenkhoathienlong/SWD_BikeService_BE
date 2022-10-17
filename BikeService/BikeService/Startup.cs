@@ -4,6 +4,7 @@ using BikeService.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
 
 namespace BikeService;
@@ -23,7 +24,35 @@ public class Startup
         services.AddControllers();
 
         //Swagger --------------------------------------
-        services.AddSwaggerGen();
+        //services.AddSwaggerGen();
+
+        services.AddSwaggerGen(option =>
+        {
+            option.SwaggerDoc("v1", new OpenApiInfo { Title = "Demo API", Version = "v1" });
+            option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                In = ParameterLocation.Header,
+                Description = "Please enter a valid token",
+                Name = "Authorization",
+                Type = SecuritySchemeType.Http,
+                BearerFormat = "JWT",
+                Scheme = "Bearer"
+            });
+            option.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type=ReferenceType.SecurityScheme,
+                            Id="Bearer"
+                        }
+                    },
+                    new string[]{}
+                }
+            });
+        });
 
         //Mapper --------------------------------------
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -56,19 +85,25 @@ public class Startup
         //    FirebaseAuthenticationHandler>(JwtBearerDefaults.AuthenticationScheme, o => { });
 
         //Authent get JWT String --------------------------------------
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
+        services.AddAuthentication(x =>
         {
-            option.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = Configuration["Jwt:Issuer"],
-                ValidAudience = Configuration["Jwt:Issuer"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
-            };
-        });
+            x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+                .AddJwtBearer(x =>
+                {
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"])),
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ValidIssuer = Configuration["Jwt:Issuer"],
+                        ValidAudience = Configuration["Jwt:Audience"]
+                    };
+                });
 
         // Add Cors --------------------------------------
         //services.AddCors();
@@ -97,6 +132,7 @@ public class Startup
         app.UseHttpsRedirection();
         app.UseRouting();
         app.UseAuthorization();
+        app.UseAuthentication();
         app.UseDeveloperExceptionPage();
         {
             app.UseCors(x => x

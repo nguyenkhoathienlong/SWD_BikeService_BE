@@ -13,4 +13,13 @@ namespace BikeService.Models.Request
         [Required]
         public ulong? IsActived { get; set; }
     }
+
+    public partial class MotorbikeCustomer
+    {
+        public string CustomerName { get; set; }
+        public string PhoneNumber { get; set; }
+        public string? Email { get; set; }
+        public string LicensePlate { get; set; }
+
+    }
 }

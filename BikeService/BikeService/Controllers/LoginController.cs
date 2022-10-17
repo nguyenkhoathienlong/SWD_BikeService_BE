@@ -30,8 +30,7 @@ namespace BikeService.Controllers
                 var token = GenerateToken(user);
                 return Ok(token);
             }
-
-            return NotFound("user not found");
+            return NotFound("User not found");
         }
 
         // To generate token
@@ -65,5 +64,7 @@ namespace BikeService.Controllers
             }
             return null;
         }
+
+
     }
 }

@@ -54,7 +54,7 @@ namespace BikeService.Controllers
                 _orderService.Update(id, orderRequest);
                 return Ok(orderRequest);
             }
-            return Ok(new ThrowingException("Please double check the data!!!")); 
+            return Ok(new ThrowingException("Please double check the data!!!"));
         }
 
         [HttpDelete("{id}")]
