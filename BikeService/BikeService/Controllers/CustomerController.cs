@@ -11,7 +11,7 @@ namespace BikeService.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("corspolicy")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize]
     public class CustomerController : ControllerBase
     {
         private readonly IMapper _mapper;

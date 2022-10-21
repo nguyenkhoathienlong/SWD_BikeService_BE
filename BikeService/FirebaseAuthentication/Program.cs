@@ -1,5 +1,6 @@
 ﻿
 using Firebase.Auth;
+using Refit;
 
 namespace FirebaseAuthentication
 {
@@ -14,6 +15,15 @@ namespace FirebaseAuthentication
             FirebaseAuthLink firebaseAuthLink = await firebaseAuthProvider.SignInWithEmailAndPasswordAsync("nguyenkhoathienlong313@gmail.com", "Nguyenkhoathienlong0967291546@");
 
             Console.WriteLine(firebaseAuthLink.FirebaseToken);
+
+            IDataService dataService = RestService.For<IDataService>("https://localhost:64391");
+            await dataService.GetData(firebaseAuthLink.FirebaseToken);
         }
+    }
+
+    public interface IDataService
+    {
+        [Get("/")]
+        Task GetData([Authorize("Bearer")] string token);
     }
 }

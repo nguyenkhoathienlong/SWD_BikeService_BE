@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BikeService", "BikeService\BikeService.csproj", "{00D87B19-BB48-4A42-94C8-1ED5AF63B27B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirebaseAuthentication", "FirebaseAuthentication\FirebaseAuthentication.csproj", "{E3A4D330-EFF2-4250-BAEE-E734EC84C73D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirebaseAdminAuthentication", "FirebaseAdminAuthentication\FirebaseAdminAuthentication.csproj", "{8F3D46B2-7ECB-4F60-BAD2-9A53B1F4C26C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{00D87B19-BB48-4A42-94C8-1ED5AF63B27B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00D87B19-BB48-4A42-94C8-1ED5AF63B27B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00D87B19-BB48-4A42-94C8-1ED5AF63B27B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E3A4D330-EFF2-4250-BAEE-E734EC84C73D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E3A4D330-EFF2-4250-BAEE-E734EC84C73D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E3A4D330-EFF2-4250-BAEE-E734EC84C73D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E3A4D330-EFF2-4250-BAEE-E734EC84C73D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F3D46B2-7ECB-4F60-BAD2-9A53B1F4C26C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F3D46B2-7ECB-4F60-BAD2-9A53B1F4C26C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F3D46B2-7ECB-4F60-BAD2-9A53B1F4C26C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F3D46B2-7ECB-4F60-BAD2-9A53B1F4C26C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

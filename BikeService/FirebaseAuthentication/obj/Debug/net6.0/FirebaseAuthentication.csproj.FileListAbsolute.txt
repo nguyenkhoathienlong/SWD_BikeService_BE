@@ -16,3 +16,4 @@ D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\FirebaseAuthentic
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\FirebaseAuthentication\obj\Debug\net6.0\FirebaseAuthentication.pdb
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\FirebaseAuthentication\obj\Debug\net6.0\FirebaseAuthentication.genruntimeconfig.cache
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\FirebaseAuthentication\obj\Debug\net6.0\ref\FirebaseAuthentication.dll
+D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\FirebaseAuthentication\bin\Debug\net6.0\Refit.dll

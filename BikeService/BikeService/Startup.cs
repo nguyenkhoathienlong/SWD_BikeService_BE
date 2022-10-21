@@ -1,11 +1,12 @@
+
+using AspNetCore.Firebase.Authentication.Extensions;
 using BikeService.Data;
 using BikeService.Helpers;
 using BikeService.Service;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using FirebaseAdmin;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Text;
+using FirebaseAdminAuthentication.DependencyInjection.Extensions;
 
 namespace BikeService;
 
@@ -80,30 +81,30 @@ public class Startup
         });
         services.AddEndpointsApiExplorer();
 
-
-        //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddScheme<AuthenticationSchemeOptions, 
-        //    FirebaseAuthenticationHandler>(JwtBearerDefaults.AuthenticationScheme, o => { });
+        //Authen Firebase
+        services.AddSingleton(FirebaseApp.Create());
+        services.AddFirebaseAuthentication();
 
         //Authent get JWT String --------------------------------------
-        services.AddAuthentication(x =>
-        {
-            x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        })
-                .AddJwtBearer(x =>
-                {
-                    x.RequireHttpsMetadata = false;
-                    x.SaveToken = true;
-                    x.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"])),
-                        ValidateIssuer = false,
-                        ValidateAudience = false,
-                        ValidIssuer = Configuration["Jwt:Issuer"],
-                        ValidAudience = Configuration["Jwt:Audience"]
-                    };
-                });
+        //services.AddAuthentication(x =>
+        //{
+        //    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        //    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        //})
+        //        .AddJwtBearer(x =>
+        //        {
+        //            x.RequireHttpsMetadata = false;
+        //            x.SaveToken = true;
+        //            x.TokenValidationParameters = new TokenValidationParameters
+        //            {
+        //                ValidateIssuerSigningKey = true,
+        //                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"])),
+        //                ValidateIssuer = false,
+        //                ValidateAudience = false,
+        //                ValidIssuer = Configuration["Jwt:Issuer"],
+        //                ValidAudience = Configuration["Jwt:Audience"]
+        //            };
+        //        });
 
         // Add Cors --------------------------------------
         //services.AddCors();
@@ -131,8 +132,8 @@ public class Startup
             });
         app.UseHttpsRedirection();
         app.UseRouting();
-        app.UseAuthorization();
         app.UseAuthentication();
+        app.UseAuthorization();
         app.UseDeveloperExceptionPage();
         {
             app.UseCors(x => x

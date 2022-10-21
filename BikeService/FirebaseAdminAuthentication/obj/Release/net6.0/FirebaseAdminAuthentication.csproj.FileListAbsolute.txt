@@ -1,0 +1,14 @@
+D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\FirebaseAdminAuthentication\bin\Release\net6.0\FirebaseAdminAuthentication.deps.json
+D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\FirebaseAdminAuthentication\bin\Release\net6.0\FirebaseAdminAuthentication.runtimeconfig.json
+D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\FirebaseAdminAuthentication\bin\Release\net6.0\FirebaseAdminAuthentication.dll
+D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\FirebaseAdminAuthentication\bin\Release\net6.0\FirebaseAdminAuthentication.pdb
+D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\FirebaseAdminAuthentication\obj\Release\net6.0\FirebaseAdminAuthentication.csproj.AssemblyReference.cache
+D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\FirebaseAdminAuthentication\obj\Release\net6.0\FirebaseAdminAuthentication.GeneratedMSBuildEditorConfig.editorconfig
+D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\FirebaseAdminAuthentication\obj\Release\net6.0\FirebaseAdminAuthentication.AssemblyInfoInputs.cache
+D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\FirebaseAdminAuthentication\obj\Release\net6.0\FirebaseAdminAuthentication.AssemblyInfo.cs
+D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\FirebaseAdminAuthentication\obj\Release\net6.0\FirebaseAdminAuthentication.csproj.CoreCompileInputs.cache
+D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\FirebaseAdminAuthentication\obj\Release\net6.0\FirebaseAdminAuthentication.dll
+D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\FirebaseAdminAuthentication\obj\Release\net6.0\refint\FirebaseAdminAuthentication.dll
+D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\FirebaseAdminAuthentication\obj\Release\net6.0\FirebaseAdminAuthentication.pdb
+D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\FirebaseAdminAuthentication\obj\Release\net6.0\FirebaseAdminAuthentication.genruntimeconfig.cache
+D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\FirebaseAdminAuthentication\obj\Release\net6.0\ref\FirebaseAdminAuthentication.dll
