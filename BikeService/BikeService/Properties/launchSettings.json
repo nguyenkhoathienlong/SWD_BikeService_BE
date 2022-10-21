@@ -3,8 +3,7 @@
     "BikeService": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": false,
-      "launchUrl": "swagger",
+      "launchBrowser": true,
       "applicationUrl": "https://localhost:64391/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",

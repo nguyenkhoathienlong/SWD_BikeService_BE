@@ -75,5 +75,3 @@ D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\R
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Release\net6.0\linux-x64\Microsoft.Bcl.AsyncInterfaces.dll
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Release\net6.0\linux-x64\Newtonsoft.Json.dll
 D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Release\net6.0\linux-x64\libuv.so
-D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Release\net6.0\linux-x64\FirebaseAdminAuthentication.dll
-D:\DocumentStudy\SWD\BE Project\SWD_BikeService_BE\BikeService\BikeService\bin\Release\net6.0\linux-x64\FirebaseAdminAuthentication.pdb

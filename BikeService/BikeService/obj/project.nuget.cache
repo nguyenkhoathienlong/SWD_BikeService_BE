@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "SQe4vTKnp8nfMSpAwnuyWICLOc5BkSNNFimpWQPUrKPrqRQ4VHYGKIYAt5IhiwXhHb2ucTpLsV8oxBFC0URGmg==",
+  "dgSpecHash": "yMY7zlZzFscIQ2CgaNWZhDRM7BafJie7/l8lo/3ZaNeiYba/pkxqKMTrTb9lHeCMpKhJ6pV7lKceVj0ke8rr8g==",
   "success": true,
   "projectFilePath": "D:\\DocumentStudy\\SWD\\BE Project\\SWD_BikeService_BE\\BikeService\\BikeService\\BikeService.csproj",
   "expectedPackageFiles": [
@@ -128,10 +128,7 @@
     "C:\\Users\\ThienLong\\.nuget\\packages\\system.text.encodings.web\\4.5.0\\system.text.encodings.web.4.5.0.nupkg.sha512",
     "C:\\Users\\ThienLong\\.nuget\\packages\\system.threading.tasks.extensions\\4.4.0\\system.threading.tasks.extensions.4.4.0.nupkg.sha512",
     "C:\\Users\\ThienLong\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
-    "C:\\Users\\ThienLong\\.nuget\\packages\\microsoft.netcore.app.runtime.linux-x64\\6.0.9\\microsoft.netcore.app.runtime.linux-x64.6.0.9.nupkg.sha512",
-    "C:\\Users\\ThienLong\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.linux-x64\\6.0.9\\microsoft.aspnetcore.app.runtime.linux-x64.6.0.9.nupkg.sha512",
-    "C:\\Users\\ThienLong\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\6.0.9\\microsoft.netcore.app.crossgen2.win-x64.6.0.9.nupkg.sha512",
-    "C:\\Users\\ThienLong\\.nuget\\packages\\microsoft.netcore.app.host.linux-x64\\6.0.9\\microsoft.netcore.app.host.linux-x64.6.0.9.nupkg.sha512"
+    "C:\\Users\\ThienLong\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\6.0.9\\microsoft.netcore.app.crossgen2.win-x64.6.0.9.nupkg.sha512"
   ],
   "logs": []
 }
