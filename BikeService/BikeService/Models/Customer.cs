@@ -1,4 +1,7 @@
-﻿namespace BikeService.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace BikeService.Models
 {
     public partial class Customer
     {
@@ -6,6 +9,7 @@
         {
             Motorbikes = new HashSet<Motorbike>();
         }
+
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string PhoneNumber { get; set; } = null!;

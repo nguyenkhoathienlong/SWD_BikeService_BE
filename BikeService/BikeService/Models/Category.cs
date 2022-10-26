@@ -1,4 +1,7 @@
-﻿namespace BikeService.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace BikeService.Models
 {
     public partial class Category
     {
@@ -9,7 +12,7 @@
 
         public int Id { get; set; }
         public string? Name { get; set; }
-        public ulong? IsService { get; set; }
+        public ulong IsActived { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
     }

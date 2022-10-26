@@ -1,9 +1,13 @@
-﻿namespace BikeService.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace BikeService.Models
 {
     public partial class Product
     {
         public Product()
         {
+            OrderDetails = new HashSet<OrderDetail>();
             Products = new HashSet<Product>();
             Services = new HashSet<Product>();
         }
@@ -15,10 +19,13 @@
         public int ManufacturerId { get; set; }
         public int CategoryId { get; set; }
         public string StoreId { get; set; } = null!;
+        public ulong IsService { get; set; }
+        public ulong IsActive { get; set; }
 
         public virtual Category Category { get; set; } = null!;
         public virtual Store IdNavigation { get; set; } = null!;
         public virtual Manufacturer Manufacturer { get; set; } = null!;
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<Product> Services { get; set; }

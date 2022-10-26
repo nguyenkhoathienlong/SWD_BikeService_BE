@@ -3,12 +3,11 @@ using AutoMapper;
 using BikeService.Data;
 using BikeService.Models;
 using BikeService.Models.Request;
-
-
+using Microsoft.EntityFrameworkCore;
 
 public interface IStoreService
 {
-    IEnumerable<Store> GetAll();
+    IEnumerable<StoreInfo> GetAll();
     Store GetById(int id);
     IEnumerable<Store> GetByName(string name);
     void Create(StoreRequest storeRequest);
@@ -42,9 +41,22 @@ public class StoreService : IStoreService
         _context.SaveChanges();
     }
 
-    public IEnumerable<Store> GetAll()
+    public IEnumerable<StoreInfo> GetAll()
     {
-        return _context.Stores;
+        var store = _context.Stores.Where(x => true)
+            .Include(x => x.Ward)
+            .ThenInclude(x => x.Area)
+            .ThenInclude(x => x.District)
+            .Select(x => new StoreInfo
+            {
+                Name = x.Name,
+                PhoneNumber = x.PhoneNumber,
+                Address = x.Address,
+                AreaName = x.Ward.Name,
+                WardName = x.Ward.Area.Name,
+                DistrictName = x.Ward.Area.District.Name,
+            }).ToList();
+        return store;
     }
 
     public Store GetById(int id)

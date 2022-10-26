@@ -1,5 +1,8 @@
-﻿using BikeService.Models;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using BikeService.Models;
 
 namespace BikeService.Data
 {
@@ -28,6 +31,7 @@ namespace BikeService.Data
         public virtual DbSet<PaymentMethod> PaymentMethods { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
         public virtual DbSet<Store> Stores { get; set; } = null!;
+        public virtual DbSet<StoreCategory> StoreCategories { get; set; } = null!;
         public virtual DbSet<Ward> Wards { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -39,11 +43,20 @@ namespace BikeService.Data
             {
                 entity.ToTable("area");
 
+                entity.HasIndex(e => e.DistrictId, "fk_district_id");
+
                 entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.DistrictId).HasColumnName("district_id");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
                     .HasColumnName("name");
+
+                entity.HasOne(d => d.District)
+                    .WithMany(p => p.Areas)
+                    .HasForeignKey(d => d.DistrictId)
+                    .HasConstraintName("fk_district_id");
             });
 
             modelBuilder.Entity<Brand>(entity =>
@@ -63,9 +76,9 @@ namespace BikeService.Data
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.IsService)
+                entity.Property(e => e.IsActived)
                     .HasColumnType("bit(1)")
-                    .HasColumnName("is_service")
+                    .HasColumnName("is_actived")
                     .HasDefaultValueSql("b'0'");
 
                 entity.Property(e => e.Name)
@@ -118,6 +131,8 @@ namespace BikeService.Data
             {
                 entity.ToTable("model");
 
+                entity.HasIndex(e => e.BrandId, "id_idx");
+
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.BrandId).HasColumnName("brand_id");
@@ -137,6 +152,12 @@ namespace BikeService.Data
                 entity.Property(e => e.Type)
                     .HasMaxLength(50)
                     .HasColumnName("type");
+
+                entity.HasOne(d => d.Brand)
+                    .WithMany(p => p.Models)
+                    .HasForeignKey(d => d.BrandId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("brand_id");
             });
 
             modelBuilder.Entity<Motorbike>(entity =>
@@ -144,6 +165,8 @@ namespace BikeService.Data
                 entity.ToTable("motorbike");
 
                 entity.HasIndex(e => e.CustomerId, "fk_customer_motorbike_idx");
+
+                entity.HasIndex(e => e.ModelId, "fk_model_id_idx");
 
                 entity.HasIndex(e => e.LicensePlate, "license_plate_UNIQUE")
                     .IsUnique();
@@ -161,16 +184,27 @@ namespace BikeService.Data
                     .HasMaxLength(11)
                     .HasColumnName("license_plate");
 
+                entity.Property(e => e.ModelId).HasColumnName("model_id");
+
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Motorbikes)
                     .HasForeignKey(d => d.CustomerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_customer_motorbike");
+
+                entity.HasOne(d => d.Model)
+                    .WithMany(p => p.Motorbikes)
+                    .HasForeignKey(d => d.ModelId)
+                    .HasConstraintName("fk_model_id");
             });
 
             modelBuilder.Entity<Order>(entity =>
             {
                 entity.ToTable("order");
+
+                entity.HasIndex(e => e.MotorbikeId, "motobike_id_idx");
+
+                entity.HasIndex(e => e.StoreId, "store_id_idx");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
@@ -181,13 +215,31 @@ namespace BikeService.Data
                 entity.Property(e => e.StoreId).HasColumnName("store_id");
 
                 entity.Property(e => e.Total).HasColumnName("total");
+
+                entity.HasOne(d => d.Motorbike)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.MotorbikeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("motobike_id");
+
+                entity.HasOne(d => d.Store)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.StoreId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("store_id");
             });
 
             modelBuilder.Entity<OrderDetail>(entity =>
             {
                 entity.ToTable("order_detail");
 
+                entity.HasIndex(e => e.OrderId, "order_id_idx");
+
+                entity.HasIndex(e => e.ProductId, "product_id_idx");
+
                 entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.OrderId).HasColumnName("order_id");
 
                 entity.Property(e => e.OriginalPrice).HasColumnName("original_price");
 
@@ -196,11 +248,26 @@ namespace BikeService.Data
                 entity.Property(e => e.PromotionPrice).HasColumnName("promotion_price");
 
                 entity.Property(e => e.Quantity).HasColumnName("quantity");
+
+                entity.HasOne(d => d.Order)
+                    .WithMany(p => p.OrderDetails)
+                    .HasForeignKey(d => d.OrderId)
+                    .HasConstraintName("order_id");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.OrderDetails)
+                    .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("product_id");
             });
 
             modelBuilder.Entity<Payment>(entity =>
             {
                 entity.ToTable("payment");
+
+                entity.HasIndex(e => e.OrderId, "order_id_idx");
+
+                entity.HasIndex(e => e.PaymentMethodId, "payment_method_id_idx");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
@@ -209,6 +276,18 @@ namespace BikeService.Data
                 entity.Property(e => e.OrderId).HasColumnName("order_id");
 
                 entity.Property(e => e.PaymentMethodId).HasColumnName("payment_method_id");
+
+                entity.HasOne(d => d.Order)
+                    .WithMany(p => p.Payments)
+                    .HasForeignKey(d => d.OrderId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_order_id");
+
+                entity.HasOne(d => d.PaymentMethod)
+                    .WithMany(p => p.Payments)
+                    .HasForeignKey(d => d.PaymentMethodId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("payment_method_id");
             });
 
             modelBuilder.Entity<PaymentMethod>(entity =>
@@ -235,6 +314,14 @@ namespace BikeService.Data
                     .HasColumnName("id");
 
                 entity.Property(e => e.CategoryId).HasColumnName("category_id");
+
+                entity.Property(e => e.IsActive)
+                    .HasColumnType("bit(1)")
+                    .HasColumnName("is_active");
+
+                entity.Property(e => e.IsService)
+                    .HasColumnType("bit(1)")
+                    .HasColumnName("is_service");
 
                 entity.Property(e => e.ManufacturerId).HasColumnName("manufacturer_id");
 
@@ -338,19 +425,48 @@ namespace BikeService.Data
                     .HasConstraintName("fk_ward_id");
             });
 
+            modelBuilder.Entity<StoreCategory>(entity =>
+            {
+                entity.ToTable("store_category");
+
+                entity.HasIndex(e => e.Name, "name_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(45)
+                    .HasColumnName("name");
+
+                entity.HasMany(d => d.Stores)
+                    .WithMany(p => p.StoreCategories)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "StoreCategoryStore",
+                        l => l.HasOne<Store>().WithMany().HasForeignKey("StoreId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("fk_store"),
+                        r => r.HasOne<StoreCategory>().WithMany().HasForeignKey("StoreCategoryId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("fk_store_category"),
+                        j =>
+                        {
+                            j.HasKey("StoreCategoryId", "StoreId").HasName("PRIMARY").HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+
+                            j.ToTable("store_category_store");
+
+                            j.HasIndex(new[] { "StoreId" }, "fk_store_idx");
+
+                            j.IndexerProperty<int>("StoreCategoryId").HasColumnName("store_category_id");
+
+                            j.IndexerProperty<int>("StoreId").HasColumnName("store_id");
+                        });
+            });
+
             modelBuilder.Entity<Ward>(entity =>
             {
                 entity.ToTable("ward");
 
                 entity.HasIndex(e => e.AreaId, "fk_area_id");
 
-                entity.HasIndex(e => e.DistrictId, "fk_district_id");
-
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.AreaId).HasColumnName("area_id");
-
-                entity.Property(e => e.DistrictId).HasColumnName("district_id");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
@@ -361,12 +477,6 @@ namespace BikeService.Data
                     .HasForeignKey(d => d.AreaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_area_id");
-
-                entity.HasOne(d => d.District)
-                    .WithMany(p => p.Wards)
-                    .HasForeignKey(d => d.DistrictId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_district_id");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -15,4 +15,15 @@ namespace BikeService.Models.Request
         [Required]
         public int WardId { get; set; }
     }
+
+    public partial class StoreInfo
+    {
+        public string Name { get; set; }
+        public string PhoneNumber { get; set; }
+        public string? Address { get; set; }
+        public string AreaName { get; set; }
+        public string WardName { get; set; }
+        public string DistrictName { get; set; }
+
+    }
 }
