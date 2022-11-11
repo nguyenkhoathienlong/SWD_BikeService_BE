@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\DocumentStudy\\CodeVisualStudio\\BikeServiceProject_SWD\\BikeServiceProject_SWD\\BikeServiceProject_SWD.csproj": {}
+    "D:\\DocumentStudy\\SWD\\BE Project\\BikeServiceProject_SWD\\BikeServiceProject_SWD\\BikeServiceProject_SWD.csproj": {}
   },
   "projects": {
-    "D:\\DocumentStudy\\CodeVisualStudio\\BikeServiceProject_SWD\\BikeServiceProject_SWD\\BikeServiceProject_SWD.csproj": {
+    "D:\\DocumentStudy\\SWD\\BE Project\\BikeServiceProject_SWD\\BikeServiceProject_SWD\\BikeServiceProject_SWD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\DocumentStudy\\CodeVisualStudio\\BikeServiceProject_SWD\\BikeServiceProject_SWD\\BikeServiceProject_SWD.csproj",
+        "projectUniqueName": "D:\\DocumentStudy\\SWD\\BE Project\\BikeServiceProject_SWD\\BikeServiceProject_SWD\\BikeServiceProject_SWD.csproj",
         "projectName": "BikeServiceProject_SWD",
-        "projectPath": "D:\\DocumentStudy\\CodeVisualStudio\\BikeServiceProject_SWD\\BikeServiceProject_SWD\\BikeServiceProject_SWD.csproj",
+        "projectPath": "D:\\DocumentStudy\\SWD\\BE Project\\BikeServiceProject_SWD\\BikeServiceProject_SWD\\BikeServiceProject_SWD.csproj",
         "packagesPath": "C:\\Users\\ThienLong\\.nuget\\packages\\",
-        "outputPath": "D:\\DocumentStudy\\CodeVisualStudio\\BikeServiceProject_SWD\\BikeServiceProject_SWD\\obj\\",
+        "outputPath": "D:\\DocumentStudy\\SWD\\BE Project\\BikeServiceProject_SWD\\BikeServiceProject_SWD\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

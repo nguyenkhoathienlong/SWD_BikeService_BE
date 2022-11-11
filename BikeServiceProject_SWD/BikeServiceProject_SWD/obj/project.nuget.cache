@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eXb5DsIkHMSh1MQcl9jcSGJFaPowsIu2GgfmssAMX9aonu9Wv6z5wZaWSaJ88KEZEqHN4O6yYhaQtxdNizIREw==",
+  "dgSpecHash": "U0Qh/OjwpyQVDL5X+GGSCL99aR7XohndAWfw+ZkLzZeOxW7bvuEWchTHNP8NnMWLGp49vy31lU7stM0FUMVGDw==",
   "success": true,
-  "projectFilePath": "D:\\DocumentStudy\\CodeVisualStudio\\BikeServiceProject_SWD\\BikeServiceProject_SWD\\BikeServiceProject_SWD.csproj",
+  "projectFilePath": "D:\\DocumentStudy\\SWD\\BE Project\\BikeServiceProject_SWD\\BikeServiceProject_SWD\\BikeServiceProject_SWD.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ThienLong\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\ThienLong\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

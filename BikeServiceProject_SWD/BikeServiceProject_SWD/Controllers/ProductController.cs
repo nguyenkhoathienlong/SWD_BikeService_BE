@@ -28,10 +28,24 @@ namespace BikeServiceProject_SWD.Controllers
             return Ok(Product);
         }
 
+        [HttpGet("get-all-product-active")]
+        public IActionResult getAllProductActive()
+        {
+            var Product = _productService.GetAllActive();
+            return Ok(Product);
+        }
+
         [HttpGet("get-all-service")]
         public IActionResult getAllService()
         {
             var Product = _productService.GetAllService();
+            return Ok(Product);
+        }
+
+        [HttpGet("get-all-service-active")]
+        public IActionResult getAllServiceActive()
+        {
+            var Product = _productService.GetAllServiceActive();
             return Ok(Product);
         }
 
@@ -40,7 +54,7 @@ namespace BikeServiceProject_SWD.Controllers
         {
             if (ModelState.IsValid)
             {
-                var Product = _productService.GetByName(name);
+                var Product = _productService.GetByProductName(name);
                 return Ok(Product);
             }
             return Ok(new ThrowingException("Please double check the data!!!"));

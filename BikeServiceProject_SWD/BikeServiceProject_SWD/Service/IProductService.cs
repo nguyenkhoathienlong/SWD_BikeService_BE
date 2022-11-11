@@ -1,6 +1,7 @@
 ﻿namespace BikeServiceProject_SWD.Service;
 using AutoMapper;
 using BikeServiceProject_SWD.Data;
+using BikeServiceProject_SWD.Helpers;
 using BikeServiceProject_SWD.Models;
 using BikeServiceProject_SWD.Models.Request;
 
@@ -8,10 +9,12 @@ using BikeServiceProject_SWD.Models.Request;
 
 public interface IProductService
 {
-    IEnumerable<Product> GetAll();
-    IEnumerable<Product> GetAllService();
+    IEnumerable<ProductRequest> GetAll();
+    IEnumerable<ProductRequest> GetAllActive();
+    IEnumerable<ProductRequest> GetAllService();
+    IEnumerable<ProductRequest> GetAllServiceActive();
     Product GetById(int id);
-    IEnumerable<Product> GetByName(string name);
+    IEnumerable<ProductRequest> GetByProductName(string name);
     void Create(ProductRequest productRequest);
     void Update(int id, ProductRequest productRequest);
     void Delete(int id);
@@ -43,18 +46,76 @@ public class ProductService : IProductService
         _context.SaveChanges();
     }
 
-    public IEnumerable<Product> GetAll()
+    public IEnumerable<ProductRequest> GetAllActive()
     {
-        IQueryable<Product> query = _context.Products;
-        query = query.Where(x => x.IsActive == 1);
-        return query.ToList();
+        var productRequest = _context.Products.Where(x => x.IsActive == 1)
+            .Select(x => new ProductRequest
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Quantity = x.Quantity,
+                Price = x.Price,
+                ManufacturerId = x.ManufacturerId,
+                CategoryId = x.CategoryId,
+                StoreId = x.StoreId,
+                IsService = x.IsService,
+                IsActive = x.IsActive,
+            }).ToList();
+        return productRequest;
     }
 
-    public IEnumerable<Product> GetAllService()
+    public IEnumerable<ProductRequest> GetAll()
     {
-        IQueryable<Product> query = _context.Products;
-        query = query.Where(x => x.IsService == 1 && x.IsActive == 1);
-        return query.ToList();
+        var productRequest = _context.Products.Where(x => true)
+            .Select(x => new ProductRequest
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Quantity = x.Quantity,
+                Price = x.Price,
+                ManufacturerId = x.ManufacturerId,
+                CategoryId = x.CategoryId,
+                StoreId = x.StoreId,
+                IsService = x.IsService,
+                IsActive = x.IsActive,
+            }).ToList();
+        return productRequest;
+    }
+
+    public IEnumerable<ProductRequest> GetAllService()
+    {
+        var query = _context.Products.Where(x => x.IsService == 1)
+            .Select(x => new ProductRequest
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Quantity = x.Quantity,
+                Price = x.Price,
+                ManufacturerId = x.ManufacturerId,
+                CategoryId = x.CategoryId,
+                StoreId = x.StoreId,
+                IsService = x.IsService,
+                IsActive = x.IsActive,
+            }).ToList();
+        return query;
+    }
+
+    public IEnumerable<ProductRequest> GetAllServiceActive()
+    {
+        var query = _context.Products.Where(x => x.IsService == 1 && x.IsActive == 1)
+            .Select(x => new ProductRequest
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Quantity = x.Quantity,
+                Price = x.Price,
+                ManufacturerId = x.ManufacturerId,
+                CategoryId = x.CategoryId,
+                StoreId = x.StoreId,
+                IsService = x.IsService,
+                IsActive = x.IsActive,
+            }).ToList();
+        return query;
     }
 
     public Product GetById(int id)
@@ -62,14 +123,22 @@ public class ProductService : IProductService
         return getProductId(id);
     }
 
-    public IEnumerable<Product> GetByName(string name)
+    public IEnumerable<ProductRequest> GetByProductName(string name)
     {
-        IQueryable<Product> query = _context.Products;
-        if (!string.IsNullOrEmpty(name))
-        {
-            query = query.Where(x => x.Name.Contains(name));
-        }
-        return query.ToList();
+        var query = _context.Products.Where(x => x.Name.Contains(name))
+                .Select(x => new ProductRequest
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Quantity = x.Quantity,
+                    Price = x.Price,
+                    ManufacturerId = x.ManufacturerId,
+                    CategoryId = x.CategoryId,
+                    StoreId = x.StoreId,
+                    IsService = x.IsService,
+                    IsActive = x.IsActive,
+                }).ToList();
+        return query;
     }
 
     public void Update(int id, ProductRequest productRequest)
