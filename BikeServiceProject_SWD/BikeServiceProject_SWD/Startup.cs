@@ -121,6 +121,7 @@ public class Startup
                 await context.Response.WriteAsync("Welcome to My Bike Service");
             });
         });
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
     }
 
 
